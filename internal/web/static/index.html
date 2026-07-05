@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>goDupFinder Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app-container">
+        <header class="glass-header">
+            <div class="logo">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M19 3H5C3.89543 3 3 3.89543 3 5V19C3 20.1046 3.89543 21 5 21H19C20.1046 21 21 20.1046 21 19V5C21 3.89543 20.1046 3 19 3Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M9 3V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 8H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 12H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M14 16H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <h1>goDupFinder</h1>
+            </div>
+        </header>
+
+        <main>
+            <div class="control-panel glass-card">
+                <h2>Scan Configuration</h2>
+                <form id="scanForm">
+                    <div class="form-group">
+                        <label for="directories">Directories (comma separated)</label>
+                        <input type="text" id="directories" placeholder="e.g., C:\Users\Downloads, D:\Photos" required>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="workers">Workers</label>
+                            <input type="number" id="workers" value="8" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="algorithm">Algorithm</label>
+                            <select id="algorithm">
+                                <option value="sha256">SHA-256</option>
+                                <option value="sha1">SHA-1</option>
+                                <option value="md5">MD-5</option>
+                                <option value="blake2">BLAKE2</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="minSize">Min Size (bytes)</label>
+                            <input type="number" id="minSize" value="1" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="maxDepth">Max Depth</label>
+                            <input type="number" id="maxDepth" value="0" min="0">
+                        </div>
+                    </div>
+                    <button type="submit" id="scanBtn" class="primary-btn">
+                        <span>Start Scan</span>
+                        <div class="loader hidden"></div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="results-panel glass-card hidden" id="resultsPanel">
+                <div class="results-header">
+                    <h2>Scan Results</h2>
+                    <div class="stats-badges">
+                        <span class="badge success" id="timeBadge">Time: 0s</span>
+                        <span class="badge warning" id="countBadge">0 Groups</span>
+                    </div>
+                </div>
+                <div class="results-content" id="resultsContent">
+                    <!-- Duplicate groups will be rendered here -->
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>
